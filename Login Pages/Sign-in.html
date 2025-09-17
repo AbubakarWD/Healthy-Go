@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in Page</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 100%;
+        }
+
+        .sidebar {
+            padding: 20px;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .logo {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 300px;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        .form-label {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            /* transform: translateY(-50%); */
+            cursor: pointer;
+            color: #6c757d;
+        }
+
+        .btn-custom {
+            width: 300px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #197953;
+            border: none;
+        }
+
+        .btn-custom:hover {
+            background-color: #145c3a;
+        }
+
+        .signin-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .form-heading {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .form-para {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .custom-form-group {
+            width: 300px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        @media (max-width: 992px) {
+            .sidebar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section id="signin">
+        <div class="container d-flex min-vh-100 p-0">
+            <!-- Sidebar Image -->
+            <div class="sidebar" style="width: 30%;">
+                <img src="./images/Sidebar.png" alt="Sidebar Image" class="w-100 h-100" style="object-fit: fill;">
+            </div>
+            <!-- Form Section -->
+            <div class="d-flex align-items-center justify-content-center flex-grow-1">
+                <div class="signin-form">
+                    <img src="./images/Logo.png" alt="Logo" class="logo">
+                    <h2 class="form-heading">Welcome back!</h2>
+                    <p class="form-para">To get started, please sign in</p>
+
+                    <form class="needs-validation" novalidate>
+                        <div class="custom-form-group">
+                            <label for="email" class="form-label">User Login</label>
+                            <input type="email" class="form-control" id="email" name="email"
+                                placeholder="Email, username or phone number" required>
+                        </div>
+
+                        <div class="custom-form-group">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password"
+                                placeholder="********" required>
+                            <span class="toggle-password" onclick="togglePassword('password', this)">
+                                <i class="fa-solid fa-eye"></i>
+                            </span>
+                        </div>
+
+                        <button type="submit" class="btn btn-custom text-white">Sign In</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            function togglePassword(fieldId, icon) {
+                const input = document.getElementById(fieldId);
+                const eyeIcon = icon.querySelector('i');
+                if (input.type === "password") {
+                    input.type = "text";
+                    eyeIcon.classList.remove('fa-eye');
+                    eyeIcon.classList.add('fa-eye-slash');
+                } else {
+                    input.type = "password";
+                    eyeIcon.classList.remove('fa-eye-slash');
+                    eyeIcon.classList.add('fa-eye');
+                }
+            }
+        </script>
+</body>
+
+</html>

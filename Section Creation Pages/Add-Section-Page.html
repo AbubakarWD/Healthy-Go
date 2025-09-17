@@ -510,7 +510,48 @@
                 </form>
             </div>
             <div class="left-div" style="width: 30%;">
+                <div class="image-upload-container bg-white p-4 rounded-3">
+                    <div class="image-placeholder position-relative" style="height: 500px;">
+                        <!-- Default placeholder state -->
+                        <div class="placeholder-content d-flex flex-column align-items-center justify-content-center h-100 border border-2 border-dashed rounded-3" style="background-color: #f8f9fa;">
+                            <i class="fas fa-image text-secondary mb-3" style="font-size: 3rem;"></i>
+                            <p class="text-secondary mb-2">Upload your image here</p>
+                            <p class="text-muted small mb-3">Supports JPG, PNG files</p>
+                            <label for="imageUpload" class="btn btn-outline-secondary px-4">
+                                <i class="fas fa-upload me-2"></i>Choose File
+                            </label>
+                        </div>
+                        <!-- Preview image will be shown here -->
+                        <div class="preview-image d-none position-relative w-100 h-100">
+                            <img src="" alt="Preview" class="w-100 h-100 rounded-3 object-fit-cover">
+                            <button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2" onclick="removeImage()">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <input type="file" id="imageUpload" accept="image/*" class="d-none" onchange="handleImageUpload(event)">
+                    </div>
+                </div>
+                <script>
+                    function handleImageUpload(event) {
+                        const file = event.target.files[0];
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = function(e) {
+                                const previewImage = document.querySelector('.preview-image img');
+                                previewImage.src = e.target.result;
+                                document.querySelector('.placeholder-content').classList.add('d-none');
+                                document.querySelector('.preview-image').classList.remove('d-none');
+                            }
+                            reader.readAsDataURL(file);
+                        }
+                    }
 
+                    function removeImage() {
+                        document.getElementById('imageUpload').value = '';
+                        document.querySelector('.preview-image').classList.add('d-none');
+                        document.querySelector('.placeholder-content').classList.remove('d-none');
+                    }
+                </script>
             </div>
         </div>
     </section>
