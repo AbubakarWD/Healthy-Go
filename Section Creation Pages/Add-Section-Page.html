@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Section</title>
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #198754;
+            --accent-color: #F16251;
+            --text-color: #212529;
+            --border-color: #dee2e6;
+        }
+
+        .profile-tag {
+            padding: 0px 0px 0px 10px;
+
+        }
+
+        .mode-dropdown {
+            background-color: #e6f4ec;
+            /* light green */
+            border-radius: 8px;
+            padding: 6px 12px;
+        }
+
+        .mode-label {
+            font-size: 12px;
+            color: #555;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .mode-value {
+            font-weight: 600;
+            font-size: 14px;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .nav-underline .nav-link {
+            color: black;
+            border-radius: 5px;
+
+        }
+
+        .nav-underline .nav-link:hover {
+            border-bottom: 3px solid orange;
+        }
+
+        .nav-underline .nav-link {
+            color: #6c757d;
+            border-bottom: 2px solid transparent;
+            padding: 0.5rem 0;
+            margin-right: 1.5rem;
+        }
+
+        .nav-underline .nav-link:hover,
+        .nav-underline .nav-link.active {
+            /* color: #198754; */
+            border-bottom-color: #F16251;
+        }
+
+        .nav-item {
+            position: relative;
+            font-size: 14px;
+        }
+
+        .nav-item .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 175px;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+            background-color: white;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-item:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-item {
+            padding: 0.5rem 1rem;
+            color: var(--text-color);
+            transition: all 0.2s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--bg-light);
+            color: var(--primary-color);
+        }
+
+        .nav-link .fa-chevron-down {
+            font-size: 0.75rem;
+            transition: transform 0.2s ease;
+        }
+
+        .nav-item:hover .fa-chevron-down {
+            transform: rotate(180deg);
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: var(--primary-color);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .navbar-nav {
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .nav-link {
+                white-space: nowrap;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .d-md-block {
+                display: none !important;
+            }
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+        }
+
+        .table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            white-space: nowrap;
+            border-bottom: 2px solid #dee2e6;
+            padding: 0.75rem;
+        }
+
+        .table td {
+            vertical-align: middle;
+            padding: 0.75rem;
+        }
+
+        .add-btn {
+            background: transparent;
+            color: var(--primary-color);
+            border: 1px dashed var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .add-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .table-responsive {
+            min-height: 200px;
+        }
+
+        .empty-state {
+            color: #6c757d;
+            text-align: center;
+            padding: 2rem;
+            border: 2px dashed #dee2e6;
+            border-radius: 8px;
+            margin: 1rem 0;
+            background-color: #f8f9fa;
+        }
+
+        /* Custom scrollbar for better UX */
+        .table-responsive::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .table-responsive::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .table-responsive::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+
+        .table-responsive::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            background-color: #d1e7dd;
+            color: #0f5132;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .status-low {
+            background-color: #d1e7dd;
+            color: #0f5132;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+            <div class="container-fluid">
+
+                <!-- Logo on the left -->
+                <a class="navbar-brand" href="#">
+                    <img src="images/Logo.png" alt="Logo" height="40">
+                </a>
+                <div class="d-flex align-items-center gap-3 ms-3">
+                    <i class="fas fa-search"></i>
+                    <i class="fa fa-bell"></i>
+                </div>
+
+                <!-- Mode Selector -->
+                <div class="ms-auto dropdown me-2">
+                    <button class="btn mode-dropdown dropdown-toggle d-flex align-items-center gap-2" type="button"
+                        id="modeDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-laptop text-success"></i>
+                        <div class="text-start">
+                            <p class="mode-label mb-0">Mode</p>
+                            <p class="mode-value mb-0" id="selectedMode">Business</p>
+                        </div>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="modeDropdown">
+                        <li><a class="dropdown-item" href="#" onclick="setMode('Business')">Business</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="setMode('Personal')">Personal</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="setMode('Education')">Education</a></li>
+                    </ul>
+                </div>
+
+                <!-- Profile section on the right -->
+                <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center me-3">
+                        <div class="rounded-circle overflow-hidden" style="width: 40px; height: 40px;">
+                            <img src="https://ui-avatars.com/api/?name=John+Doe&background=random" alt="Profile"
+                                class="img-fluid">
+                        </div>
+                        <div class="text-end me-3">
+                            <div class="fw-bold">John Doe</div>
+                            <div class="text-muted small profile-tag">Administrator</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- Second Row -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-0">
+            <div class="container-fluid">
+                <!-- Sidebar Toggle -->
+                <!-- <button class="btn rounded-circle border d-flex align-items-center justify-content-center me-3"
+                    style="width: 40px; height: 40px;">
+                    <img src="images/Sidebar.png" alt="Sidebar" style="width: 20px; height: 20px;">
+                </button> -->
+
+                <!-- Toggle Button -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Navigation Links -->
+                <div class="navbar-collapse">
+                    <ul class="navbar-nav nav-underline">
+                        <li class="nav-item">
+                            <a class="nav-link active d-flex align-items-center gap-1" href="#">
+                                Dashboard
+                                <i class="fas fa-chevron-down small"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Overview</a></li>
+                                <li><a class="dropdown-item" href="#">Analytics</a></li>
+                                <li><a class="dropdown-item" href="#">Reports</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-1" href="#">
+                                Master
+                                <i class="fas fa-chevron-down small"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">User Management</a></li>
+                                <li><a class="dropdown-item" href="#">Role Management</a></li>
+                                <li><a class="dropdown-item" href="#">Settings</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-1" href="#">
+                                Product
+                                <i class="fas fa-chevron-down small"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Catalog</a></li>
+                                <li><a class="dropdown-item" href="#">Categories</a></li>
+                                <li><a class="dropdown-item" href="#">Inventory</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-1" href="#">
+                                Transaction
+                                <i class="fas fa-chevron-down small"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Orders</a></li>
+                                <li><a class="dropdown-item" href="#">Payments</a></li>
+                                <li><a class="dropdown-item" href="#">History</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-1" href="#">
+                                Non Transaction
+                                <i class="fas fa-chevron-down small"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Activities</a></li>
+                                <li><a class="dropdown-item" href="#">Events</a></li>
+                                <li><a class="dropdown-item" href="#">Logs</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-1" href="#">
+                                Finance
+                                <i class="fas fa-chevron-down small"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Revenue</a></li>
+                                <li><a class="dropdown-item" href="#">Expenses</a></li>
+                                <li><a class="dropdown-item" href="#">Reports</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-1" href="#">
+                                Account
+                                <i class="fas fa-chevron-down small"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><a class="dropdown-item" href="#">Security</a></li>
+                                <li><a class="dropdown-item" href="#">Preferences</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-1" href="#">
+                                Delivery
+                                <i class="fas fa-chevron-down small"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Tracking</a></li>
+                                <li><a class="dropdown-item" href="#">Shipping</a></li>
+                                <li><a class="dropdown-item" href="#">Returns</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-1" href="#">
+                                Report
+                                <i class="fas fa-chevron-down small"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Sales Report</a></li>
+                                <li><a class="dropdown-item" href="#">Analytics</a></li>
+                                <li><a class="dropdown-item" href="#">Custom Reports</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-1" href="#">
+                                Tools
+                                <i class="fas fa-chevron-down small"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Import/Export</a></li>
+                                <li><a class="dropdown-item" href="#">Backup</a></li>
+                                <li><a class="dropdown-item" href="#">Settings</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="p-4" id="Section-data">
+        <!-- Heading -->
+        <div class="heading-row p-2">
+            <h3 class="me-2"><i class="fa-solid fa-arrow-left me-4"></i>Add Section Creation</h3>
+        </div>
+        <div class="data-section d-flex">
+            <div class="right-div" style="width: 70%;">
+                <!-- Form -->
+                <form class="row g-3 p-2">
+                    <div class="col-md-9">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="alias" class="form-label">Alias</label>
+                        <input type="text" class="form-control" id="alias">
+                    </div>
+                    <div class="col-6">
+                        <label for="cuisine" class="form-label">Cuisine</label>
+                        <select name="cuisine" id="cuisine" class="form-select">
+                            <option selected></option>
+                            <option></option>
+                            <option></option>
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <label for="subcuisine" class="form-label">Sub Cuisine</label>
+                        <input type="text" class="form-control" name="subcuisine" id="subcuisine">
+                    </div>
+                    <div class="col-md-12">
+                        <label class="form-label d-block mb-2">Sekat</label>
+                        <div class="d-flex flex-wrap gap-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="sekat" id="sekatKarbo">
+                                <label class="form-check-label" for="sekatKarbo">Karbo</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="sekat" id="sekatAddon">
+                                <label class="form-check-label" for="sekatAddon">Add-on</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="sekat" id="sekatExtra">
+                                <label class="form-check-label" for="sekatExtra">Extra</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="sekat" id="sekatProtein">
+                                <label class="form-check-label" for="sekatProtein">Protein</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="sekat" id="sekatVeggie">
+                                <label class="form-check-label" for="sekatVeggie">Veggie</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="sekat" id="sekatTanpaKarbo">
+                                <label class="form-check-label" for="sekatTanpaKarbo">Tanpa Karbo / Sayur</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="Pemrosesan" class="form-label">Pemrosesan / Potongan Bahan</label>
+                        <input type="text" name="Pemrosesan" class="form-control" id="Pemrosesan">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="grmatang" class="form-label">Gr Matang</label>
+                        <input type="text" name="grmatang" class="form-control" id="grmatang">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="rasa" class="form-label">Rasa</label>
+                        <input type="text" name="rasa" class="form-control" id="rasa">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="topping" class="form-label">Topping</label>
+                        <input type="text" name="topping" class="form-control" id="topping">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="addon" class="form-label">Add on</label>
+                        <input type="text" name="addon" class="form-control" id="addon">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="Garnish" class="form-label">Garnish</label>
+                        <input type="text" name="Garnish" class="form-control" id="Garnish">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="metode" class="form-label">Metode</label>
+                        <input type="text" name="metode" class="form-control" id="metode">
+                    </div>
+                    <div class="col-md-8">
+                        <label for="cookingmethod" class="form-label">Cooking Method</label>
+                        <textarea class="form-control" name="cookingmethod" id="cookingmethod" rows="3"
+                            style="resize: vertical;"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="left-div" style="width: 30%;">
+
+            </div>
+        </div>
+    </section>
+    <section class="bg-light">
+        <div class="container-fluid p-4">
+            <div class="table-container">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="mb-0 fw-bold">Main Ingredient</h5>
+
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Item Name</th>
+                                <th>Mentah</th>
+                                <th>Harga</th>
+                                <th>Energi (kKal)</th>
+                                <th>Protein (gr)</th>
+                                <th>Karbo (gr)</th>
+                                <th>Lemak (gr)</th>
+                                <th>Serat (gr)</th>
+                                <th>Natrium (mg)</th>
+                                <th>Kolesterol (mg)</th>
+                                <th>Gula (gr)</th>
+                                <th>Kandungan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="12">
+                                    <div class="empty-state">
+                                        No selection has been made yet
+                                        <button class="add-btn">
+                                            <i class="fas fa-plus"></i>
+                                            Add
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="bg-light">
+        <div class="container-fluid p-4">
+            <div class="table-container">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="mb-0 fw-bold">Main Ingredient</h5>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Item Name</th>
+                                <th>Mentah</th>
+                                <th>Harga</th>
+                                <th>Energi (kKal)</th>
+                                <th>Protein (gr)</th>
+                                <th>Karbo (gr)</th>
+                                <th>Lemak (gr)</th>
+                                <th>Serat (gr)</th>
+                                <th>Natrium (mg)</th>
+                                <th>Kolesterol (mg)</th>
+                                <th>Gula (gr)</th>
+                                <th>Kandungan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="12">
+                                    <div class="empty-state">
+                                        No selection has been made yet
+                                        <button class="add-btn">
+                                            <i class="fas fa-plus"></i>
+                                            Add
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="bg-light container-fluid p-4">
+        <div class="d-flex gap-3 align-items-center mb-4">
+            <div class="nutrition-summary flex-grow-1 d-flex align-items-center bg-white rounded-2 p-3">
+                <div class="d-flex align-items-center gap-2 text-secondary">
+                    <i class="fas fa-chart-line text-danger"></i>
+                    Nutrition
+                </div>
+                <div class="d-flex align-items-center gap-4 ms-4">
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="text-secondary">Energi</span>
+                        <span class="fw-semibold">0 kKal</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="text-secondary">Protein</span>
+                        <span class="fw-semibold">0 gr</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="text-secondary">Carbo</span>
+                        <span class="fw-semibold">0 gr</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="text-secondary">Fat</span>
+                        <span class="fw-semibold">0 gr</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="text-secondary">Serat</span>
+                        <span class="fw-semibold">0 gr</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="text-secondary">Natrium</span>
+                        <span class="fw-semibold">0 gr</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="text-secondary">Kolesterol</span>
+                        <span class="fw-semibold">0 gr</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="text-secondary">Gula</span>
+                        <span class="fw-semibold">0 gr</span>
+                    </div>
+                </div>
+            </div>
+            <div class="food-cost-summary bg-white rounded-2 p-3">
+                <div class="d-flex align-items-center gap-4">
+                    <div class="d-flex align-items-center gap-2 text-secondary">
+                        <i class="fas fa-wallet text-warning"></i>
+                        Food Cost
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="fw-semibold">Rp 0</span>
+                        <span class="status-badge status-low">Low</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-end gap-3 mt-4">
+            <button type="button" class="btn px-4" style="border: 1px solid #727474;">Cancel</button>
+            <button type="button" class="btn px-4" style="background-color: #F16251; color: white;">Save</button>
+        </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+
+    </script>
+</body>
+
+</html>
