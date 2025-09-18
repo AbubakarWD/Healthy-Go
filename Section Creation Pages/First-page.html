@@ -1,10 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>First Page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
   <!-- Bootstrap CDN -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
@@ -47,24 +47,26 @@
     .nav-underline .nav-link {
       color: black;
       border-radius: 5px;
+      font-weight: bolder;
 
     }
 
     .nav-underline .nav-link:hover {
-      border-bottom: 3px solid orange;
+      /* border-bottom: 3px solid orange; */
     }
 
     .nav-underline .nav-link {
       color: #6c757d;
       border-bottom: 2px solid transparent;
       padding: 0.5rem 0;
-      margin-right: 1.5rem;
+      margin-right: 0.3rem;
     }
 
     .nav-underline .nav-link:hover,
     .nav-underline .nav-link.active {
-      /* color: #198754; */
-      border-bottom-color: #F16251;
+      color: #197953;
+      background-color: #E4F7EB;
+      /* border-bottom-color: #F16251; */
     }
 
     .nav-item {
@@ -77,7 +79,7 @@
       position: absolute;
       top: 100%;
       left: 0;
-      min-width: 175px;
+      min-width: 150px;
       padding: 0.5rem 0;
       margin-top: 0.5rem;
       background-color: white;
@@ -149,6 +151,11 @@
       max-width: 200px;
     }
 
+    table tr td:nth-child(2) {
+      color: #197953;
+      font-weight: bolder;
+    }
+
     .action-cell {
       width: 100px;
     }
@@ -168,6 +175,18 @@
       border-radius: 8px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     }
+
+    .page-link {
+      color: #197953;
+    }
+
+    .page-item .active {
+      color: white;
+      background-color: #197953;
+
+    }
+
+    /* .form-check-input {} */
   </style>
 </head>
 
@@ -236,6 +255,7 @@
           <ul class="navbar-nav nav-underline">
             <li class="nav-item">
               <a class="nav-link active d-flex align-items-center gap-1" href="#">
+                <i class="fas fa-th-large"></i>
                 Dashboard
                 <i class="fas fa-chevron-down small"></i>
               </a>
@@ -247,6 +267,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link d-flex align-items-center gap-1" href="#">
+                <i class="fas fa-cog"></i>
                 Master
                 <i class="fas fa-chevron-down small"></i>
               </a>
@@ -258,6 +279,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link d-flex align-items-center gap-1" href="#">
+                <i class="fas fa-box"></i>
                 Product
                 <i class="fas fa-chevron-down small"></i>
               </a>
@@ -269,6 +291,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link d-flex align-items-center gap-1" href="#">
+                <i class="fas fa-shopping-cart"></i>
                 Transaction
                 <i class="fas fa-chevron-down small"></i>
               </a>
@@ -280,6 +303,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link d-flex align-items-center gap-1" href="#">
+                <i class="fas fa-file-alt"></i>
                 Non Transaction
                 <i class="fas fa-chevron-down small"></i>
               </a>
@@ -291,6 +315,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link d-flex align-items-center gap-1" href="#">
+                <i class="fas fa-dollar-sign"></i>
                 Finance
                 <i class="fas fa-chevron-down small"></i>
               </a>
@@ -302,6 +327,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link d-flex align-items-center gap-1" href="#">
+                <i class="fas fa-user"></i>
                 Account
                 <i class="fas fa-chevron-down small"></i>
               </a>
@@ -313,6 +339,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link d-flex align-items-center gap-1" href="#">
+                <i class="fas fa-truck"></i>
                 Delivery
                 <i class="fas fa-chevron-down small"></i>
               </a>
@@ -324,6 +351,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link d-flex align-items-center gap-1" href="#">
+                <i class="fas fa-chart-bar"></i>
                 Report
                 <i class="fas fa-chevron-down small"></i>
               </a>
@@ -335,6 +363,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link d-flex align-items-center gap-1" href="#">
+                <!-- <i class="fas fa-tools"></i> -->
                 Tools
                 <i class="fas fa-chevron-down small"></i>
               </a>
@@ -382,33 +411,40 @@
     <div class="row g-3 mb-4">
       <div class="col-md-2">
         <div class="position-relative">
-          <i class="fas fa-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
+          <i class="fas fa-search position-absolute top-50 start-0 translate-middle-y ms-3 text-danger"></i>
           <input type="text" class="form-control ps-5" placeholder="Search name">
         </div>
       </div>
       <div class="col-md-2">
-        <select class="form-select">
+        <select class="form-select" aria-placeholder="Cuisine">
           <option value="">Cuisine</option>
           <option value="indonesian">Indonesian</option>
           <option value="asian">Asian</option>
+          <option value="western">western</option>
         </select>
       </div>
       <div class="col-md-2">
-        <select class="form-select">
-          <option value="">Sub Cuisine</option>
-          <option value="aceh">Aceh</option>
-        </select>
+        <input type="text" class="form-control" placeholder="Sub Cuisine">
+        <!-- <select class="form-select">
+                    <option value="">Sub Cuisine</option>
+                    <option value="aceh">Aceh</option>
+                </select> -->
       </div>
       <div class="col-md-2">
         <select class="form-select">
           <option value="">Sekat</option>
           <option value="karbo">Karbo</option>
+          <option value="karbo">Protien</option>
+          <option value="karbo">Veggie</option>
+          <option value="karbo">Add on</option>
+          <option value="karbo">Extra</option>
+          <option value="karbo">X Karbo/Sayur</option>
         </select>
       </div>
       <div class="col-md-2">
         <input type="text" class="form-control" placeholder="Bahan">
       </div>
-      <div class="col-md-2 d-flex gap-3" style="font-size: 13px;">
+      <div class="col-md-2 d-flex gap-3 border rounded pt-1" style="font-size: 13px;">
         <div class="form-check">
           <input class="form-check-input" type="checkbox" id="menuRoti">
           <label class="form-check-label" for="menuRoti">Menu Roti</label>
@@ -430,14 +466,14 @@
             <th scope="col">Sekat</th>
             <th scope="col">Cuisine</th>
             <th scope="col">Sub Cuisine</th>
-            <th scope="col">Nutrition (kKal)</th>
-            <th scope="col">Protien (gr)</th>
-            <th scope="col">Carbo (gr)</th>
-            <th scope="col">Fat (gr)</th>
-            <th scope="col">Serat (gr)</th>
-            <th scope="col">Natrium (gr)</th>
-            <th scope="col">Kolesterol (gr)</th>
-            <th scope="col">Gula (gr)</th>
+            <th scope="col">Nutrition  <br> (kKal)</th>
+            <th scope="col">Protien  <br> (gr)</th>
+            <th scope="col">Carbo <br> (gr)</th>
+            <th scope="col">Fat  <br> (gr)</th>
+            <th scope="col">Serat  <br> (gr)</th>
+            <th scope="col">Natrium  <br> (gr)</th>
+            <th scope="col">Kolesterol  <br> (gr)</th>
+            <th scope="col">Gula <br>  (gr)</th>
             <th scope="col">Food Cost</th>
             <th scope="col">Created by</th>
             <th scope="col">Last Edited by</th>
@@ -723,9 +759,13 @@
         <nav>
           <ul class="pagination pagination-sm">
             <li class="page-item"><a class="page-link" href="#"><i class="fas fa-chevron-left"></i></a></li>
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link active" href="#">1</a></li>
             <li class="page-item"><a class="page-link" href="#">2</a></li>
             <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">4</a></li>
+            <li class="page-item"><a class="page-link" href="#">5</a></li>
+            <li class="page-item"><a class="page-link" href="#">...</a></li>
+            <li class="page-item"><a class="page-link" href="#">30</a></li>
             <li class="page-item"><a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
             </li>
           </ul>
