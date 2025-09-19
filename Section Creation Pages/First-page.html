@@ -136,6 +136,25 @@
       }
     }
 
+    #nav-tab {
+      font-size: 1rem;
+      /* font-weight: 500; */
+      text-decoration: none;
+      /* color: black; */
+      /* padding: 1rem 0; */
+      /* margin-right: 0.3rem; */
+      /* padding: 10px 10px 10px 10px; */
+      background-color: white;
+      /* border-bottom: 2px solid #F16251; */
+      border-radius: 0;
+
+    }
+
+    #nav-tab:hover {
+      color: #6c757d;
+      border-bottom: 2px solid #F16251;
+    }
+
     .table th {
       background-color: #f8f9fa;
       font-weight: 600;
@@ -389,21 +408,21 @@
     </div>
     <!-- Navigation Tabs -->
     <div class="border-bottom mb-4">
-      <ul class="nav nav-underline">
+      <ul class="nav nav-underline" style="border: none;">
         <li class="nav-item">
-          <a class="nav-link" href="#">Bahan</a>
+          <a class="nav-link" href="#" id="nav-tab">Bahan</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="#">Section Creation</a>
+          <a class="nav-link active" href="#" id="nav-tab"> Section Creation</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Menu Creation</a>
+          <a class="nav-link" href="#" id="nav-tab">Menu Creation</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Category</a>
+          <a class="nav-link " href="#" id="nav-tab">Category</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Type</a>
+          <a class="nav-link " href="#" id="nav-tab">Type</a>
         </li>
       </ul>
     </div>
@@ -417,10 +436,10 @@
       </div>
       <div class="col-md-2">
         <select class="form-select" aria-placeholder="Cuisine">
-          <option value="">Cuisine</option>
+          <option value="" selected disabled>Cuisine</option>
           <option value="indonesian">Indonesian</option>
           <option value="asian">Asian</option>
-          <option value="western">western</option>
+          <option value="western">Western</option>
         </select>
       </div>
       <div class="col-md-2">
@@ -432,7 +451,7 @@
       </div>
       <div class="col-md-2">
         <select class="form-select">
-          <option value="">Sekat</option>
+          <option value="" selected disabled>Sekat</option>
           <option value="karbo">Karbo</option>
           <option value="karbo">Protien</option>
           <option value="karbo">Veggie</option>
@@ -466,14 +485,14 @@
             <th scope="col">Sekat</th>
             <th scope="col">Cuisine</th>
             <th scope="col">Sub Cuisine</th>
-            <th scope="col">Nutrition  <br> (kKal)</th>
-            <th scope="col">Protien  <br> (gr)</th>
+            <th scope="col">Nutrition <br> (kKal)</th>
+            <th scope="col">Protien <br> (gr)</th>
             <th scope="col">Carbo <br> (gr)</th>
-            <th scope="col">Fat  <br> (gr)</th>
-            <th scope="col">Serat  <br> (gr)</th>
-            <th scope="col">Natrium  <br> (gr)</th>
-            <th scope="col">Kolesterol  <br> (gr)</th>
-            <th scope="col">Gula <br>  (gr)</th>
+            <th scope="col">Fat <br> (gr)</th>
+            <th scope="col">Serat <br> (gr)</th>
+            <th scope="col">Natrium <br> (gr)</th>
+            <th scope="col">Kolesterol <br> (gr)</th>
+            <th scope="col">Gula <br> (gr)</th>
             <th scope="col">Food Cost</th>
             <th scope="col">Created by</th>
             <th scope="col">Last Edited by</th>

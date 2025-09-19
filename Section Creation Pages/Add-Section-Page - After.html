@@ -197,11 +197,11 @@
         .empty-state {
             color: #6c757d;
             text-align: center;
-            /* padding: 2rem; */
-            /* border: 2px dashed #dee2e6; */
+            padding: 2rem;
+            border: 2px dashed #dee2e6;
             border-radius: 8px;
             margin: 1rem 0;
-            /* background-color: #f8f9fa; */
+            background-color: #f8f9fa;
         }
 
         /* Custom scrollbar for better UX */
@@ -576,8 +576,8 @@
                 <div class="table-responsive">
                     <table class="table table-hover mb-0">
                         <thead>
-                            <tr style="text-align: center;" class="">
-                                <th style="text-align: left;">Item Name</th>
+                            <tr style=" border-bottom: #c51313;" class="">
+                                <th>Item Name</th>
                                 <th>Mentah</th>
                                 <th>Harga</th>
                                 <th>Energi <br> (kKal)</th>
@@ -589,46 +589,18 @@
                                 <th>Kolesterol <br> (mg)</th>
                                 <th>Gula <br> (gr)</th>
                                 <th>Kandungan</th>
-                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>
-                                    <select class="form-select" style="width: 250px;">
-                                        <option value="" selected disabled></option>
-                                        <option value="">Bawang Putih</option>
-                                        <option value="">Gula Pasir</option>
-                                        <option value="">Bombai</option>
-                                        <option value="">Daun Bawang</option>
-                                        <option value="">Minyak Goreng</option>
-                                        <option value="">Masako Ayam @1kg</option>
-                                        <option value="">Wijen Putih</option>
-                                        <option value="">Aida Babuk @500gr</option>
-                                    </select>
-                                </td>
-                                <td><input type="text" class="form-control"></td>
-                                <td><input type="text" class="form-control"></td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td><input type="text" class="form-control" placeholder="Add Kandungan" style="width: 180px;"></td>
-                                <td>
-                                    <button class="btn btn-link text-danger p-0">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="13" class="text-end">
-                                    <button class="btn add-btn">
-                                        <i class="fas fa-plus"></i> Add
-                                    </button>
+                                <td colspan="12">
+                                    <div class="empty-state">
+                                        <p>No selection has been made yet</p>
+                                        <button class="add-btn">
+                                            <i class="fas fa-plus"></i>
+                                            Add
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
@@ -666,7 +638,7 @@
                             <tr>
                                 <td colspan="12">
                                     <div class="empty-state">
-                                        <p>No selection has been made yet</p>
+                                        <p>No selection has been made yet</p><samp></samp>
                                         <button class="add-btn">
                                             <i class="fas fa-plus"></i>
                                             Add
